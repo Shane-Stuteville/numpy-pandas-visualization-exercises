@@ -90,23 +90,6 @@ mpg[mpg['manufacturer'] == 'dodge'].sort_values(by='average_mileage', ascending=
 mpg[mpg['manufacturer'] == 'dodge'].sort_values(by='average_mileage').head(1)
 
 
-
-
-
-
-
-'''
-Load the Mammals dataset. Read the documentation for it, and use the data to answer these questions:
-
-How many rows and columns are there?
-What are the data types?
-Summarize the dataframe with .info and .describe
-What is the the weight of the fastest animal?
-What is the overal percentage of specials?
-How many animals are hoppers that are above the median speed? What percentage is this?
-
-'''
-
 '''
 3. Load the Mammals dataset. Read the documentation for it, and use the data to answer these questions:
 '''
