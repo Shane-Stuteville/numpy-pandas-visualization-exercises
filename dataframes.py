@@ -1,4 +1,95 @@
 '''
+1. Copy the code from the lesson to create a dataframe full of student grades.
+'''
+
+
+#Run this python version 3 code and store the dataframe to answer additional questions in this thread:
+
+import pandas as pd
+import numpy as np
+
+np.random.seed(123)
+
+students = ['Sally', 'Jane', 'Suzie', 'Billy', 'Ada', 'John', 'Thomas',
+            'Marie', 'Albert', 'Richard', 'Isaac', 'Alan']
+
+# randomly generate scores for each student for each subject
+# note that all the values need to have the same length here
+math_grades = np.random.randint(low=60, high=100, size=len(students))
+english_grades = np.random.randint(low=60, high=100, size=len(students))
+reading_grades = np.random.randint(low=60, high=100, size=len(students))
+
+df = pd.DataFrame({'name': students,
+                   'math': math_grades,
+                   'english': english_grades,
+                   'reading': reading_grades})
+
+type(df)
+
+
+
+
+
+'''
+    What is the python version 3 code to create a column named passing_english that indicates whether each student has a passing grade in english (70 or higher) from 
+    the df dataframe?
+'''
+df['passing_english'] = df['english'] >= 70
+
+'''
+    What is the python version 3 code to sort the english grades in df dataframe by the passing_english column? How are duplicates handled?
+'''
+df.sort_values(by=['passing_english', 'english'], ascending=[False, False], inplace=True)
+
+'''
+This code sorts the df dataframe by the passing_english column first, and then by the english column in descending order. The ascending parameter is set to 
+[False, False] to sort both columns in descending order. The inplace parameter is set to True to modify the df dataframe in place rather than creating a new 
+sorted dataframe.
+
+Duplicates are handled by the sort_values method according to the order of the columns in the by parameter. In this case, if there are multiple students 
+with the same passing grade in English, they will be sorted by their English grades in descending order. If there are still ties, the order of the original 
+df dataframe will be preserved.
+'''
+
+'''
+    What is the python version 3 code to sort by english grades (failing at the top of the list) and then by student name with the df dataframe?
+'''
+
+df.sort_values(by=['passing_english', 'english', 'name'], ascending=[True, True, True], inplace=True)
+'''
+
+This code sorts the df dataframe by the passing_english column first in ascending order (so that failing grades appear at the top of the list), then by the 
+english column in ascending order (so that the lowest English grades appear first within each passing/failing group), and finally by the name column in ascending 
+order (so that students are sorted alphabetically within each passing/failing group). The ascending parameter is set to [True, True, True] to sort all three columns 
+in ascending order. The inplace parameter is set to True to modify the df dataframe in place rather than creating a new sorted dataframe.
+'''
+
+'''
+    What is the python version 3 code to sort the english grades first by passing_english, and then by the actual english grade?
+'''
+df.sort_values(by=['passing_english', 'english'], ascending=[False, False], inplace=True)
+'''
+This code sorts the df dataframe by the passing_english column first, so that passing grades appear before failing grades. Within each group of passing or failing 
+grades, the english column is then sorted in descending order, so that the highest English grades appear first within each passing/failing group. The ascending 
+parameter is set to [False, False] to sort both columns in descending order. The inplace parameter is set to True to modify the df dataframe in place rather than 
+creating a new sorted dataframe.
+
+'''
+'''
+    What is the python version 3 code to calculate each students overall grade (the overall grade is the average of the math, english, and reading grades) and add 
+    it as a new column on the df dataframe? Also, include code to print the results.
+'''
+df['overall_grade'] = df[['math', 'english', 'reading']].mean(axis=1)
+print(df)
+'''
+This code first calculates the mean of the math, english, and reading columns for each row using the mean() method, with axis=1 specified to calculate the mean across 
+columns. It then creates a new column called overall_grade in the df dataframe to store the resulting means.
+
+The print(df) command is used to print the updated df dataframe, which now includes a new column called overall_grade containing each student's overall grade.
+
+'''
+
+'''
 All the datasets loaded from the pydataset library will be pandas dataframes.
 
 2. Load the mpg dataset. Read the documentation for the dataset and use it for the following questions:
